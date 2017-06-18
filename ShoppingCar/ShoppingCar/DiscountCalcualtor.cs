@@ -7,9 +7,10 @@ namespace ShoppingCar
 {
     public class DiscountCalcualtor
     {
-        public decimal CalcualtePayoutMoney(int bookCount)
+        public decimal CalcualtePayoutMoney(int bookCount, int series2BookCount)
         {
-            return new decimal();
+            var price = 100;
+            return bookCount * price;
         }
     }
 }
