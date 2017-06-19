@@ -7,19 +7,34 @@ namespace ShoppingCar
 {
     public class DiscountCalcualtor
     {
-        public decimal CalcualtePayoutMoney(int [] shoppingCar)
+        private readonly Dictionary<int, decimal> _discountMapping = new Dictionary<int, decimal>()
+            {
+                {1,1},
+                {2,0.95m},
+                {3,0.9m},
+                {4,0.8m},
+                {5,0.75m},
+            };
+
+        public decimal CalculatePayoutMoney(List<Book> shoppingCar)
         {
             var price = 100;
-            var discount = 0.95m;
-            if (shoppingCar[0] == 0 || shoppingCar[1] == 0)
+            var payoutMoney = 0m;
+
+            while (true)
             {
-                return (shoppingCar[0]+ shoppingCar[1]) * price;
+                var bookSet = shoppingCar.Count(x => x.Count > 0);
+                if (bookSet == 0)
+                {
+                    break;
+                }
+
+                payoutMoney += bookSet * price * _discountMapping[bookSet];
+                foreach (var book in shoppingCar)
+                {
+                    book.Count -= 1;
+                }
             }
-
-            var setCount = shoppingCar[0] - shoppingCar[1];
-            var payoutMoney = (shoppingCar[0] - setCount + shoppingCar[1]) * price * discount;
-            payoutMoney += setCount*price;
-
             return payoutMoney;
         }
     }
