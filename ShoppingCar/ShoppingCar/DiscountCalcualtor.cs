@@ -7,17 +7,17 @@ namespace ShoppingCar
 {
     public class DiscountCalcualtor
     {
-        public decimal CalcualtePayoutMoney(int series1BookCount, int series2BookCount)
+        public decimal CalcualtePayoutMoney(int [] shoppingCar)
         {
             var price = 100;
             var discount = 0.95m;
-            if (series1BookCount == 0 || series2BookCount == 0)
+            if (shoppingCar[0] == 0 || shoppingCar[1] == 0)
             {
-                return (series1BookCount + series2BookCount) * price;
+                return (shoppingCar[0]+ shoppingCar[1]) * price;
             }
 
-            var setCount = series1BookCount - series2BookCount;
-            var payoutMoney = (series1BookCount - setCount + series2BookCount) * price * discount;
+            var setCount = shoppingCar[0] - shoppingCar[1];
+            var payoutMoney = (shoppingCar[0] - setCount + shoppingCar[1]) * price * discount;
             payoutMoney += setCount*price;
 
             return payoutMoney;
