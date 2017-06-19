@@ -93,5 +93,39 @@ namespace ShoppingCarTest
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Buy_series1_1_series2_1_series3_2_should_be_370()
+        {
+            var shoppingCar = new List<Book>()
+            {
+                new Book {Series = 1, Count = 1},
+                new Book {Series = 2, Count = 1},
+                new Book {Series = 3, Count = 2},
+            };
+            var target = new DiscountCalcualtor();
+            var expected = 370;
+
+            var actual = target.CalculatePayoutMoney(shoppingCar);
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Buy_series1_1_series2_2_series3_2_should_be_460()
+        {
+            var shoppingCar = new List<Book>()
+            {
+                new Book {Series = 1, Count = 1},
+                new Book {Series = 2, Count = 2},
+                new Book {Series = 3, Count = 2},
+            };
+            var target = new DiscountCalcualtor();
+            var expected = 460;
+
+            var actual = target.CalculatePayoutMoney(shoppingCar);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
