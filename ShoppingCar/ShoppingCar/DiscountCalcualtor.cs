@@ -16,24 +16,16 @@ namespace ShoppingCar
                 {5,0.75m},
             };
 
+        private readonly int _price = 100;
+
         public decimal CalculatePayoutMoney(List<Book> shoppingCar)
         {
-            var price = 100;
             var payoutMoney = 0m;
-
-            while (true)
+            while (shoppingCar.Count(x => x.Count > 0) > 0)
             {
                 var bookSet = shoppingCar.Count(x => x.Count > 0);
-                if (bookSet == 0)
-                {
-                    break;
-                }
-
-                payoutMoney += bookSet * price * _discountMapping[bookSet];
-                foreach (var book in shoppingCar)
-                {
-                    book.Count -= 1;
-                }
+                payoutMoney += bookSet * _price * _discountMapping[bookSet];
+                shoppingCar.ForEach(x => { x.Count -= 1; });
             }
             return payoutMoney;
         }
