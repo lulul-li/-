@@ -24,10 +24,20 @@ namespace ShoppingCar
             while (shoppingCar.Count(x => x.Count > 0) > 0)
             {
                 var bookSet = shoppingCar.Count(x => x.Count > 0);
-                payoutMoney += bookSet * _price * _discountMapping[bookSet];
+                payoutMoney += bookSet * _price * GetDiscount(bookSet);
                 shoppingCar.ForEach(x => { x.Count -= 1; });
             }
             return payoutMoney;
+        }
+
+        private decimal GetDiscount(int bookSet)
+        {
+            if (_discountMapping.ContainsKey(bookSet))
+            {
+                return _discountMapping[bookSet];
+            }
+
+            return 1;
         }
     }
 }
